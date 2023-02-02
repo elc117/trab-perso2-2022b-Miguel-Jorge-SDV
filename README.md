@@ -145,3 +145,4 @@ print(fmap(m2, f).val)
 
 
 Fonte: https://dev.to/marciofrayze/functors-58le, https://haskell.pesquisa.ufabc.edu.br/haskell/09.functors/
+Link no replit: https://replit.com/@Miguel-Jorge-SD/TrabalhoHaskell-2#main.hs
