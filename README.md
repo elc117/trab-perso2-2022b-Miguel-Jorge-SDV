@@ -76,6 +76,7 @@ O que ocorre na verdade nesta linguagem de programação (e algumas outras tamb�
 Functors em outras linguagens:
 
 Em C++ precisamos definir a função fmap com os templates do tipo a e do tipo b. As definições de fmap para o tipo optional e para o tipo vector ficam:
+
 template<class A, class B>
 std::optional<B> fmap(std::function<B(A)> f, std::optional<A> opt)
 {
