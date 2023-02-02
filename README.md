@@ -63,6 +63,11 @@ E o resultado será igual ao obtido quando utilizamos uma expressão lambda:
 Este mecanismo é útil em 2 situações:
     • Quando a função é muito complexa, para facilitar o entendimento do código ou; 
     • Quando queremos re-aproveitar uma função pré-existente. 
+    
+    
+Processamento preguiçoso:
+Em Haskell o processamento da função fmap é preguiçoso (lazy evaluation).
+O que ocorre na verdade nesta linguagem de programação (e algumas outras também) é que este processamento é postergado até o último momento possível. A execução fica pendente e, quando o próximo valor da lista é requisitado, a operação é realizada para aquele elemento específico e retornado para o chamador.
 
 Functors em outras linguagens:
 Em C++ precisamos definir a função fmap com os templates do tipo a e do tipo b. As definições de fmap para o tipo optional e para o tipo vector ficam:
