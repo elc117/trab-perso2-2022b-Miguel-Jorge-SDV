@@ -64,5 +64,57 @@ Este mecanismo é útil em 2 situações:
     • Quando a função é muito complexa, para facilitar o entendimento do código ou; 
     • Quando queremos re-aproveitar uma função pré-existente. 
 
+Functors em outras linguagens:
+Em C++ precisamos definir a função fmap com os templates do tipo a e do tipo b. As definições de fmap para o tipo optional e para o tipo vector ficam:
+template<class A, class B>
+std::optional<B> fmap(std::function<B(A)> f, std::optional<A> opt)
+{
+    if (!opt.has_value())
+	return std::optional<B>{};
+    else
+	return std::optional<B>{ f(*opt) };
+}
+
+template<class A, class B>
+std::vector<B> fmap(std::function<B(A)> f, std::vector<A> v)
+{
+   std::vector<B> w;
+   std::transform(std::begin(v), std::end(v), std::back_inserter(w) , f);
+   return w;
+}
+
+Em Python, podemos utilizar o singledispatch, porém temos que inverter a ordem dos parâmetros uma vez que o tipo paramétrico é sempre o primeiro argumento:
+from functools import singledispatch
+
+class Maybe:
+    def __init__(self, x = None):
+	self.val = x
+
+@singledispatch
+def fmap(a, f):
+    print("Not implemented for" + str(type(a)))
+
+@fmap.register(list)
+def _(l, f):
+    return list(map(f, l))
+
+@fmap.register(Maybe)
+def _(m, f):
+    if m.val is None:
+	m.val = None
+    else:
+	m.val = f(m.val)
+    return m
+
+f = lambda x: x*2
+
+l = [1,2,3]
+m1 = Maybe(2)
+m2 = Maybe()
+
+print(fmap(l, f))
+print(fmap(m1, f).val)
+print(fmap(m2, f).val)
+
 
 Fonte: https://dev.to/marciofrayze/functors-58le, https://haskell.pesquisa.ufabc.edu.br/haskell/09.functors/
