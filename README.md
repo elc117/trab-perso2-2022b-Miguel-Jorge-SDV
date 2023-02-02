@@ -78,20 +78,32 @@ Functors em outras linguagens:
 Em C++ precisamos definir a função fmap com os templates do tipo a e do tipo b. As definições de fmap para o tipo optional e para o tipo vector ficam:
 
 template<class A, class B>
+
 std::optional<B> fmap(std::function<B(A)> f, std::optional<A> opt)
+
 {
+
     if (!opt.has_value())
+    
 	return std::optional<B>{};
+	
     else
+    
 	return std::optional<B>{ f(*opt) };
+	
 }
 
 template<class A, class B>
+
 std::vector<B> fmap(std::function<B(A)> f, std::vector<A> v)
+
 {
    std::vector<B> w;
+   
    std::transform(std::begin(v), std::end(v), std::back_inserter(w) , f);
+   
    return w;
+   
 }
 
 Em Python, podemos utilizar o singledispatch, porém temos que inverter a ordem dos parâmetros uma vez que o tipo paramétrico é sempre o primeiro argumento:
