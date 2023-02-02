@@ -15,6 +15,7 @@ Como toda função de primeira ordem, a função que passamos como argumento par
 
 
 Fmap com função lambda:
+
 Se quisermos somar 1 à todos os elementos de uma lista de números, podemos escrever o seguinte código em Haskell:
 fmap (\n -> n + 1) [1, 2, 3, 4] 
 Para definir uma expressão lambda nesta linguagem, utilizamos o caractere \ (que lembra um pouco o letra lambda do alfabeto grego: λ).
@@ -25,6 +26,7 @@ Desta forma o resultado deste fmap será:
 
 
 Voltando para a definição, neste exemplo:
+
     • f é um Functor do tipo Lista, que em Haskell é representando pelo símbolo [ ]. 
     • a neste caso é um Num, representando o tipo dos elementos contidos na lista de entrada. 
     • b também é um Num, representando o tipo dos elementos da lista que será retornada. 
@@ -50,6 +52,7 @@ class Functor f where
     fmap :: (a -> b) -> f a -> f b  
 Note que a entrada é f a e a saída é f b. Ou seja, o tipo do Functor, representado pela letra f
 
+
 Utilizado fmap com uma função nomeada:
 
 Podemos utilizar uma função já existente e passa-lá com argumento para o fmap.
@@ -66,10 +69,12 @@ Este mecanismo é útil em 2 situações:
     
     
 Processamento preguiçoso:
+
 Em Haskell o processamento da função fmap é preguiçoso (lazy evaluation).
 O que ocorre na verdade nesta linguagem de programação (e algumas outras também) é que este processamento é postergado até o último momento possível. A execução fica pendente e, quando o próximo valor da lista é requisitado, a operação é realizada para aquele elemento específico e retornado para o chamador.
 
 Functors em outras linguagens:
+
 Em C++ precisamos definir a função fmap com os templates do tipo a e do tipo b. As definições de fmap para o tipo optional e para o tipo vector ficam:
 template<class A, class B>
 std::optional<B> fmap(std::function<B(A)> f, std::optional<A> opt)
